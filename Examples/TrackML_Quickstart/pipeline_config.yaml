@@ -1,80 +1,83 @@
 common_configs:
-  experiment_name: trackml_quickstart_1
   artifact_directory: artifacts
+  clear_directories: true
+  experiment_name: trackml_quickstart_1_40epochs
   gpus: 1
-  clear_directories: True
-
-metric_learning_configs:
-  # Dataset parameters
-  input_dir: datasets/quickstart_example_1GeV
-  output_dir: datasets/quickstart_metric_learning_processed
-  pt_signal_cut: 1.
-  pt_background_cut: 1.
-  train_split: [80, 10, 10] # Number of [training, validation, testing] examples
-  true_edges: modulewise_true_edges
-
-  # Model parameters
-  spatial_channels: 3
-  cell_channels: 9
-  emb_hidden: 1024
-  nb_layer: 4
-  emb_dim: 12
-  activation: Tanh
-  weight: 2
-  randomisation: 2
-  points_per_batch: 100000
-  r_train: 0.1
-  r_val: 0.1
-  r_test: 0.1
-  knn: 50
-  warmup: 8
-  margin: 0.1
-  lr: 0.001
-  factor: 0.7
-  patience: 4
-  regime: [rp, hnm, norm]
-  max_epochs: 20
-
-gnn_configs:
-  # Dataset parameters
-  input_dir: datasets/quickstart_metric_learning_processed
-  output_dir: datasets/quickstart_gnn_processed
-  edge_cut: 0.5
-  pt_signal_min: 1.
-  pt_background_min: 1.
-  datatype_names: [train, val, test] # Which directory prefixes to use, assuming at least a train dataset 
-  datatype_split: [80, 10, 10] # Number of [training, validation, testing] examples
-  noise: False
-
-  # Model parameters
-  spatial_channels: 3
-  cell_channels: 0
-  hidden: 128
-  n_graph_iters: 6
-  nb_node_layer: 3
-  nb_edge_layer: 3
-  layernorm: True
-  aggregation: sum_max
-  hidden_activation: SiLU
-  weight: 2
-  warmup: 10
-  lr: 0.002
-  factor: 0.7
-  patience: 8
-  truth_key: pid_signal
-  regime: [pid]
-  mask_background: True
-  max_epochs: 30
-
-track_building_configs:
-  score_cut: 0.9
-  output_dir: datasets/quickstart_track_building_processed
-
 evaluation_configs:
-  output_dir: datasets/quickstart_evaluation
-  min_pt: 1
-  max_eta: 4
-  min_track_length: 3
-  min_particle_length: 3
   matching_fraction: 0.5
   matching_style: ATLAS
+  max_eta: 4
+  min_particle_length: 3
+  min_pt: 1
+  min_track_length: 3
+  output_dir: datasets/quickstart_evaluation
+gnn_configs:
+  aggregation: sum_max
+  cell_channels: 0
+  datatype_names:
+  - train
+  - val
+  - test
+  datatype_split:
+  - 80
+  - 10
+  - 10
+  edge_cut: 0.5
+  factor: 0.7
+  hidden: 128
+  hidden_activation: SiLU
+  input_dir: datasets/quickstart_metric_learning_processed
+  layernorm: true
+  lr: 0.002
+  mask_background: true
+  max_epochs: 30
+  n_graph_iters: 6
+  nb_edge_layer: 3
+  nb_node_layer: 3
+  noise: false
+  output_dir: datasets/quickstart_gnn_processed
+  patience: 8
+  pt_background_min: 1.0
+  pt_signal_min: 1.0
+  regime:
+  - pid
+  spatial_channels: 3
+  truth_key: pid_signal
+  warmup: 10
+  weight: 2
+metric_learning_configs:
+  activation: Tanh
+  cell_channels: 9
+  emb_dim: 12
+  emb_hidden: 1024
+  factor: 0.7
+  input_dir: datasets/quickstart_example_1GeV
+  knn: 50
+  lr: 0.001
+  margin: 0.1
+  max_epochs: 30
+  nb_layer: 2
+  output_dir: datasets/quickstart_metric_learning_processed
+  patience: 4
+  points_per_batch: 100000
+  pt_background_cut: 1.0
+  pt_signal_cut: 1.0
+  r_test: 0.1
+  r_train: 0.1
+  r_val: 0.1
+  randomisation: 2
+  regime:
+  - rp
+  - hnm
+  - norm
+  spatial_channels: 3
+  train_split:
+  - 80
+  - 10
+  - 10
+  true_edges: modulewise_true_edges
+  warmup: 8
+  weight: 2
+track_building_configs:
+  output_dir: datasets/quickstart_track_building_processed
+  score_cut: 0.9

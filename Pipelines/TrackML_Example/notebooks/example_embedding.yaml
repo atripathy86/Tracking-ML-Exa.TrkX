@@ -1,5 +1,6 @@
 # Input/output configuration
-input_dir: /global/cfs/cdirs/m3443/data/trackml-codalab/feature_store/quickstart_example_1GeV
+#input_dir: /global/cfs/cdirs/m3443/data/trackml-codalab/feature_store/quickstart_example_1GeV
+input_dir: /local/data/exatrkx/feature_store/quickstart_example_1GeV
 
 # Dataset parameters
 pt_signal_cut: 1.
@@ -34,4 +35,5 @@ max_epochs: 50
 callbacks: EmbeddingTelemetry #[EmbeddingInferenceCallback, 
 
 # Logging
-wandb_save_dir: /global/cscratch1/sd/danieltm/ExaTrkX/wandb_data
+#wandb_save_dir: /global/cscratch1/sd/danieltm/ExaTrkX/wandb_data
+wandb_save_dir: /local/data/exatrkx/notebook_wandb_data
