@@ -9,6 +9,9 @@ import argparse
 import logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(message)s')
 
+from cmflib import cmf
+from cmflib import dvc_wrapper
+
 from pytorch_lightning import Trainer
 from pytorch_lightning.loggers import CSVLogger
 import torch
@@ -52,12 +55,26 @@ def train(config_file="pipeline_config.yaml"):
         logger=logger
     )
 
-    trainer.fit(model)
+    #trainer.fit(model)
 
     logging.info(headline("c) Saving model") )
 
     os.makedirs(save_directory, exist_ok=True)
-    trainer.save_checkpoint(os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"))
+    #trainer.save_checkpoint(os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"))
+
+    cmf_logger = cmf.Cmf(filename="mlmd", pipeline_name="exatrkx")
+    context=cmf_logger.create_context(pipeline_stage="1. Train Metric Learning") #TODO: custom_properties={"TBD":"TBD"}
+    execution=cmf_logger.create_execution(execution_type="Train-1", custom_properties = metric_learning_configs)
+
+    cmf_logger.log_dataset(os.getcwd()+"/"+metric_learning_configs["input_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}
+    cmf_logger.log_dataset(os.getcwd()+"/"+metric_learning_configs["output_dir"],"output") #TODO: custom_properties={"TBD":"TBD"}
+
+    cmf_logger.log_model(
+        path=os.getcwd()+"/"+os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"), 
+        event="output", 
+        model_framework="PyTorchLightning", 
+        model_type="MLP Embedding",
+        model_name="LayerlessEmbedding")
 
     return trainer, model
 

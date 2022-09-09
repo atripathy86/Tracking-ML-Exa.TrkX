@@ -5,11 +5,13 @@ from Scripts import train_metric_learning, run_metric_learning_inference, train_
 from Scripts.utils.convenience_utils import get_example_data, plot_true_graph, get_training_metrics, plot_training_metrics, plot_neighbor_performance, plot_predicted_graph, plot_track_lengths, plot_edge_performance, plot_graph_sizes
 import yaml
 
+from cmflib import cmf
+from cmflib import dvc_wrapper
+
 import warnings
 warnings.filterwarnings("ignore")
 CONFIG_ORIG = 'pipeline_config-default.yaml'
 CONFIG = 'pipeline_config.yaml'
-
 
 #Update config
 def update_config(configs):
@@ -23,19 +25,24 @@ def execution(CONFIG):
     #embedding_metrics = get_training_metrics(metric_learning_trainer)
 
     #2. Construct graphs from metric learning inference
-    graph_builder = run_metric_learning_inference(CONFIG)
+    context=cmf_logger.create_context(pipeline_stage="2. Metric Learning Inference") #TODO: custom_properties={"TBD":"TBD"}
+    graph_builder = run_metric_learning_inference(CONFIG, cmf_logger)
 
     #3. Train graph neural networks
-    gnn_trainer, gnn_model = train_gnn(CONFIG)
+    context=cmf_logger.create_context(pipeline_stage="3. Train GNN") #TODO: custom_properties={"TBD":"TBD"}
+    gnn_trainer, gnn_model = train_gnn(CONFIG, cmf_logger)
 
     #4 GNN inference
-    run_gnn_inference(CONFIG)
+    context=cmf_logger.create_context(pipeline_stage="4. GNN Inference") #TODO: custom_properties={"TBD":"TBD"}
+    run_gnn_inference(CONFIG,cmf_logger)
 
     #5 Build Track Candidates from GNN
-    build_track_candidates(CONFIG)
+    context=cmf_logger.create_context(pipeline_stage="5. Build Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
+    build_track_candidates(CONFIG,cmf_logger)
 
     #6 Evaluate Track Candidates
-    evaluated_events, reconstructed_particles, particles, matched_tracks, tracks = evaluate_candidates(CONFIG)
+    context=cmf_logger.create_context(pipeline_stage="6. Evaluate Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
+    evaluated_events, reconstructed_particles, particles, matched_tracks, tracks = evaluate_candidates(CONFIG,cmf_logger)
 
 
 #Load Config
@@ -196,7 +203,7 @@ with open(CONFIG_ORIG, 'r') as f:
 # update_config(configs)
 # execution(CONFIG)
 
-#3x12 did not run
+
 n_graph_nb_node_layer_opts=[3] #Removed 6,9,12 since it has run
 metric_nb_layer_opts=[2,4,8,12] #removed 16. Removed 2,4 since it has run
 for x in n_graph_nb_node_layer_opts:
