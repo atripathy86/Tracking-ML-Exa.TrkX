@@ -49,39 +49,39 @@ with open(CONFIG_ORIG, 'r') as f:
 #Run Defaults
 execution(CONFIG_ORIG)    
 
-#emb_hidden_opts=[ 512 , 256, 2048]
-#for x in emb_hidden_opts:
-    #print(configs["metric_learning_configs"]["emb_hidden"])
-#    configs["metric_learning_configs"]["emb_hidden"] = x
-#    update_config(configs)
-#    #execution(CONFIG)
+emb_hidden_opts=[ 512 , 256, 2048]
+for x in emb_hidden_opts:
+    print(configs["metric_learning_configs"]["emb_hidden"])
+   configs["metric_learning_configs"]["emb_hidden"] = x
+   update_config(configs)
+   #execution(CONFIG)
 
-#16 did not run
-# metric_nb_layer_opts=[2,8,16]
-# for x in metric_nb_layer_opts:
-#     configs["metric_learning_configs"]["nb_layer"] = x
-#     update_config(configs)
-#     execution(CONFIG)
+    #16 did not run
+metric_nb_layer_opts=[2,8] #removed 16
+for x in metric_nb_layer_opts:
+    configs["metric_learning_configs"]["nb_layer"] = x
+    update_config(configs)
+    execution(CONFIG)
 
-# n_graph_hidden_opts=[64,256,512]
-# for x in n_graph_hidden_opts:
-#     configs["gnn_configs"]["hidden"] = x
-#     update_config(configs)
-#     execution(CONFIG)
+n_graph_hidden_opts=[64,256,512]
+for x in n_graph_hidden_opts:
+    configs["gnn_configs"]["hidden"] = x
+    update_config(configs)
+    execution(CONFIG)
 
-# n_graph_nb_node_layer_opts=[6,9,12]
-# for x in n_graph_nb_node_layer_opts:
-#     configs["gnn_configs"]["nb_node_layer"] = x
-#     update_config(configs)
-#     execution(CONFIG)
+n_graph_nb_node_layer_opts=[6,9,12]
+for x in n_graph_nb_node_layer_opts:
+    configs["gnn_configs"]["nb_node_layer"] = x
+    update_config(configs)
+    execution(CONFIG)
     
     
-# n_graph_nb_node_layer_opts=[6,9,12]
-# for x in n_graph_nb_node_layer_opts:
-#     configs["gnn_configs"]["nb_node_layer"] = x
-#     configs["gnn_configs"]["nb_edge_layer"] = x
-#     update_config(configs)
-#     execution(CONFIG)
+n_graph_nb_node_layer_opts=[6,9,12]
+for x in n_graph_nb_node_layer_opts:
+    configs["gnn_configs"]["nb_node_layer"] = x
+    configs["gnn_configs"]["nb_edge_layer"] = x
+    update_config(configs)
+    execution(CONFIG)
     
 
 #GNN fails with: RuntimeError: CUDA out of memory. Tried to allocate 3.15 GiB (GPU 0; 15.78 GiB total capacity; 3.47 GiB already allocated; 1.76 GiB free; 9.30 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
@@ -91,124 +91,124 @@ execution(CONFIG_ORIG)
 # update_config(configs)
 # execution(CONFIG)
 
-# configs["metric_learning_configs"]["emb_hidden"] = 128
-# configs["gnn_configs"]["hidden"] = 64
-# print("--------------------Now executing 128x64------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 128
+configs["gnn_configs"]["hidden"] = 64
+print("--------------------Now executing 128x64------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 128
-# configs["gnn_configs"]["hidden"] = 128
-# print("--------------------Now executing 128x128------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 128
+configs["gnn_configs"]["hidden"] = 128
+print("--------------------Now executing 128x128------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 128
-# configs["gnn_configs"]["hidden"] = 256
-# print("--------------------Now executing 128x256------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 128
+configs["gnn_configs"]["hidden"] = 256
+print("--------------------Now executing 128x256------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 256
-# configs["gnn_configs"]["hidden"] = 32
-# print("--------------------Now executing 256x32------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 256
+configs["gnn_configs"]["hidden"] = 32
+print("--------------------Now executing 256x32------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 256
-# configs["gnn_configs"]["hidden"] = 64
-# print("--------------------Now executing 256x64------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 256
+configs["gnn_configs"]["hidden"] = 64
+print("--------------------Now executing 256x64------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 256
-# configs["gnn_configs"]["hidden"] = 256
-# print("--------------------Now executing 256x256------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 256
+configs["gnn_configs"]["hidden"] = 256
+print("--------------------Now executing 256x256------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 512
-# configs["gnn_configs"]["hidden"] = 32
-# print("--------------------Now executing 512x32------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 512
+configs["gnn_configs"]["hidden"] = 32
+print("--------------------Now executing 512x32------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 512
-# configs["gnn_configs"]["hidden"] = 64
-# print("--------------------Now executing 512x64------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 512
+configs["gnn_configs"]["hidden"] = 64
+print("--------------------Now executing 512x64------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 512
-# configs["gnn_configs"]["hidden"] = 256
-# print("--------------------Now executing 512x256------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 512
+configs["gnn_configs"]["hidden"] = 256
+print("--------------------Now executing 512x256------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 1024
-# configs["gnn_configs"]["hidden"] = 32
-# print("--------------------Now executing 1024x32------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 1024
+configs["gnn_configs"]["hidden"] = 32
+print("--------------------Now executing 1024x32------------------")
+update_config(configs)
+execution(CONFIG)
 
-# configs["metric_learning_configs"]["emb_hidden"] = 1024
-# configs["gnn_configs"]["hidden"] = 64
-# print("--------------------Now executing 1024x64------------------")
-# update_config(configs)
-# execution(CONFIG)
-
-
-# configs["metric_learning_configs"]["emb_hidden"] = 2048
-# configs["gnn_configs"]["hidden"] = 32
-# print("--------------------Now executing 2048x32------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 1024
+configs["gnn_configs"]["hidden"] = 64
+print("--------------------Now executing 1024x64------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 2048
-# configs["gnn_configs"]["hidden"] = 64
-# print("--------------------Now executing 2048x64------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 2048
+configs["gnn_configs"]["hidden"] = 32
+print("--------------------Now executing 2048x32------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["emb_hidden"] = 2048
-# configs["gnn_configs"]["hidden"] = 256
-# print("--------------------Now executing 2048x256------------------")
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 2048
+configs["gnn_configs"]["hidden"] = 64
+print("--------------------Now executing 2048x64------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-## One time
-# configs["metric_learning_configs"]["emb_hidden"] = 1024
-# configs["metric_learning_configs"]["nb_layer"] = 16 
-# update_config(configs)
-# execution(CONFIG)
+configs["metric_learning_configs"]["emb_hidden"] = 2048
+configs["gnn_configs"]["hidden"] = 256
+print("--------------------Now executing 2048x256------------------")
+update_config(configs)
+execution(CONFIG)
 
 
-# configs["metric_learning_configs"]["nb_layer"] = 12
-# configs["gnn_configs"]["nb_node_layer"] = 6 
-# update_config(configs)
-# execution(CONFIG)
+# One time
+configs["metric_learning_configs"]["emb_hidden"] = 1024
+configs["metric_learning_configs"]["nb_layer"] = 16 
+update_config(configs)
+execution(CONFIG)
 
 
-# n_graph_nb_node_layer_opts=[3] #Removed 6,9,12 since it has run
-# metric_nb_layer_opts=[2,4,8,12] #removed 16. Removed 2,4 since it has run
-# for x in n_graph_nb_node_layer_opts:
-#     for y in metric_nb_layer_opts:
-#         configs["gnn_configs"]["nb_node_layer"] = x
-#         configs["metric_learning_configs"]["nb_layer"] = y
-#         update_config(configs)
-#         execution(CONFIG)
+configs["metric_learning_configs"]["nb_layer"] = 12
+configs["gnn_configs"]["nb_node_layer"] = 6 
+update_config(configs)
+execution(CONFIG)
+
+
+n_graph_nb_node_layer_opts=[3] #Removed 6,9,12 since it has run
+metric_nb_layer_opts=[2,4,8,12] #removed 16. Removed 2,4 since it has run
+for x in n_graph_nb_node_layer_opts:
+    for y in metric_nb_layer_opts:
+        configs["gnn_configs"]["nb_node_layer"] = x
+        configs["metric_learning_configs"]["nb_layer"] = y
+        update_config(configs)
+        execution(CONFIG)
 
 
 

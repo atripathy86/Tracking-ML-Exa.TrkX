@@ -50,7 +50,7 @@ def train(config_file="pipeline_config.yaml"):
     graph_scorer = GNNInferenceBuilder(model)
     graph_scorer.infer()
 
-    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx", graph = True)
     context=cmf_logger.create_context(pipeline_stage="4. GNN Inference") #TODO: custom_properties={"TBD":"TBD"}
     execution=cmf_logger.create_execution(execution_type="InferGNN", custom_properties = gnn_configs)
 

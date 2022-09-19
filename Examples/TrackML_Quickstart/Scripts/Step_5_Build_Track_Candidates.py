@@ -79,7 +79,7 @@ def train(config_file="pipeline_config.yaml"):
     for graph in tqdm(all_graphs):
         label_graph(graph, score_cut=score_cut, save_dir=save_dir)
 
-    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx", graph = True)
     context=cmf_logger.create_context(pipeline_stage="5. Build Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
     execution=cmf_logger.create_execution(execution_type="TrackCandidates", custom_properties = track_building_configs)
 

@@ -179,12 +179,23 @@ def evaluate(config_file="pipeline_config.yaml"):
     # Plot the results across pT and eta
     plot_pt_eff(particles)
 
-    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx", graph = True)
     context=cmf_logger.create_context(pipeline_stage="6. Evaluate Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
     execution=cmf_logger.create_execution(execution_type="EvalTrackCandidates", custom_properties = evaluation_configs)
 
     cmf_logger.log_dataset(track_building_configs["output_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}
     cmf_logger.log_dataset(evaluation_configs["output_dir"],"output") #TODO: custom_properties={"TBD":"TBD"}
+
+    cmf_logger.log_execution_metrics("Efficiency",eff)
+    cmf_logger.log_execution_metrics("Fake Rate",fake_rate)
+    cmf_logger.log_execution_metrics("Duplication Rate",dup_rate)
+    cmf_logger.log_execution_metrics("Number of reconstructed particles",n_reconstructed_particles)
+    cmf_logger.log_execution_metrics("Number of particles", n_particles)
+    cmf_logger.log_execution_metrics("Number of matched tracks", n_matched_tracks)
+    cmf_logger.log_execution_metrics("Number of tracks", n_tracks)
+    cmf_logger.log_execution_metrics("Number of duplicate reconstructed particles", n_dup_reconstructed_particles)  
+
+
 
     # cmf_logger.log_model(
     #     path=os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"), 

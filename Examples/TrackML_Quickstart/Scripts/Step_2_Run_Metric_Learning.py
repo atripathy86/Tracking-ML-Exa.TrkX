@@ -48,7 +48,7 @@ def train(config_file="pipeline_config.yaml"):
     graph_builder = EmbeddingInferenceBuilder(model, metric_learning_configs["train_split"], overwrite=True, knn_max=1000, radius=metric_learning_configs["r_test"])
     graph_builder.build()
 
-    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx", graph = True)
     context=cmf_logger.create_context(pipeline_stage="2. Metric Learning Inference") #TODO: custom_properties={"TBD":"TBD"}
     execution=cmf_logger.create_execution(execution_type="Infer1", custom_properties = metric_learning_configs)
 

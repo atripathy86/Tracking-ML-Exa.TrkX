@@ -14,6 +14,7 @@ from cmflib import dvc_wrapper
 
 from pytorch_lightning import Trainer
 from pytorch_lightning.loggers import CSVLogger
+from pytorch_lightning.loggers import CMFLogger
 
 sys.path.append("../../")
 
@@ -46,11 +47,13 @@ def train(config_file="pipeline_config.yaml"):
 
     save_directory = os.path.join(common_configs["artifact_directory"], "gnn")
     logger = CSVLogger(save_directory, name=common_configs["experiment_name"])
+    cmflogger = CMFLogger("mlmd", pipeline_name="exatrkx", pipeline_stage="3. Train GNN", execution_type="TrainGNN", graph=True)
+    print("My Execution ID="+str(cmflogger._execution.id))
 
     trainer = Trainer(
         gpus=common_configs["gpus"],
         max_epochs=gnn_configs["max_epochs"],
-        logger=logger
+        logger=[logger, cmflogger]
     )
 
     trainer.fit(model)
@@ -60,9 +63,12 @@ def train(config_file="pipeline_config.yaml"):
     os.makedirs(save_directory, exist_ok=True)
     trainer.save_checkpoint(os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"))
 
-    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx", graph = True)
     context=cmf_logger.create_context(pipeline_stage="3. Train GNN") #TODO: custom_properties={"TBD":"TBD"}
-    execution=cmf_logger.create_execution(execution_type="TrainGNN", custom_properties = gnn_configs)
+    #execution=cmf_logger.create_execution(execution_type="TrainGNN", custom_properties = gnn_configs)
+    #We update execution
+    cmf_logger.update_execution(execution_id=cmflogger._execution.id, custom_properties = gnn_configs)
+
 
     cmf_logger.log_dataset(gnn_configs["input_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}
     cmf_logger.log_dataset(gnn_configs["output_dir"],"output") #TODO: custom_properties={"TBD":"TBD"}
