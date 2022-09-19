@@ -90,5 +90,5 @@ src/Pipelines/Examples/notebooks/*.png
 **/*.root
 
 # dataset and outputs
-*datasets*
-*artifacts*
+#*datasets*
+#*artifacts*

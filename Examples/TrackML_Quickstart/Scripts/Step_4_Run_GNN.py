@@ -10,6 +10,9 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(message)s')
 import torch
 
+from cmflib import cmf
+from cmflib import dvc_wrapper
+
 sys.path.append("../../")
 
 from Pipelines.TrackML_Example.LightningModules.GNN.Models.interaction_gnn import InteractionGNN
@@ -46,6 +49,22 @@ def train(config_file="pipeline_config.yaml"):
     logging.info(headline( "b) Running inferencing" ))
     graph_scorer = GNNInferenceBuilder(model)
     graph_scorer.infer()
+
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    context=cmf_logger.create_context(pipeline_stage="4. GNN Inference") #TODO: custom_properties={"TBD":"TBD"}
+    execution=cmf_logger.create_execution(execution_type="InferGNN", custom_properties = gnn_configs)
+
+    cmf_logger.log_dataset(gnn_configs["input_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}
+    cmf_logger.log_dataset(gnn_configs["output_dir"],"output") #TODO: custom_properties={"TBD":"TBD"}
+
+    save_directory = os.path.join(common_configs["artifact_directory"], "gnn")
+
+    cmf_logger.log_model(
+        path=os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"), 
+        event="input", 
+        model_framework="PyTorchLightning", 
+        model_type="GNN",
+        model_name="GNN")
 
 if __name__ == "__main__":
 

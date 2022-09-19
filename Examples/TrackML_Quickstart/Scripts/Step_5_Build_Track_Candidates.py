@@ -18,6 +18,9 @@ from functools import partial
 
 from utils.convenience_utils import headline, delete_directory
 
+from cmflib import cmf
+from cmflib import dvc_wrapper
+
 sys.path.append("../../")
 
 def parse_args():
@@ -76,6 +79,19 @@ def train(config_file="pipeline_config.yaml"):
     for graph in tqdm(all_graphs):
         label_graph(graph, score_cut=score_cut, save_dir=save_dir)
 
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    context=cmf_logger.create_context(pipeline_stage="5. Build Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
+    execution=cmf_logger.create_execution(execution_type="TrackCandidates", custom_properties = track_building_configs)
+
+    cmf_logger.log_dataset(gnn_configs["output_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}
+    cmf_logger.log_dataset(track_building_configs["output_dir"],"output") #TODO: custom_properties={"TBD":"TBD"}
+
+    # cmf_logger.log_model(
+    #     path=os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"), 
+    #     event="output", 
+    #     model_framework="PyTorchLightning", 
+    #     model_type="GNN",
+    #     model_name="GNN")
 
 
 if __name__ == "__main__":

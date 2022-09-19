@@ -10,6 +10,9 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s:%(message)s')
 import torch
 
+from cmflib import cmf
+from cmflib import dvc_wrapper
+
 sys.path.append("../../")
 
 from Pipelines.TrackML_Example.LightningModules.Embedding.Models.layerless_embedding import LayerlessEmbedding
@@ -44,6 +47,21 @@ def train(config_file="pipeline_config.yaml"):
 
     graph_builder = EmbeddingInferenceBuilder(model, metric_learning_configs["train_split"], overwrite=True, knn_max=1000, radius=metric_learning_configs["r_test"])
     graph_builder.build()
+
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    context=cmf_logger.create_context(pipeline_stage="2. Metric Learning Inference") #TODO: custom_properties={"TBD":"TBD"}
+    execution=cmf_logger.create_execution(execution_type="Infer1", custom_properties = metric_learning_configs)
+
+    cmf_logger.log_dataset(metric_learning_configs["output_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}
+    #cmf_logger.log_dataset(metric_learning_configs["output_dir"],"output") #TODO: custom_properties={"TBD":"TBD"}
+
+    save_directory = os.path.join(common_configs["artifact_directory"], "metric_learning")
+    cmf_logger.log_model(
+        path=os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"), 
+        event="input", 
+        model_framework="PyTorchLightning", 
+        model_type="MLP Embedding",
+        model_name="LayerlessEmbedding")
 
     return graph_builder
 

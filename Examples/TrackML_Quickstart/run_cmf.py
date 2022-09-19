@@ -25,24 +25,19 @@ def execution(CONFIG):
     #embedding_metrics = get_training_metrics(metric_learning_trainer)
 
     #2. Construct graphs from metric learning inference
-    context=cmf_logger.create_context(pipeline_stage="2. Metric Learning Inference") #TODO: custom_properties={"TBD":"TBD"}
-    graph_builder = run_metric_learning_inference(CONFIG, cmf_logger)
+    graph_builder = run_metric_learning_inference(CONFIG)
 
     #3. Train graph neural networks
-    context=cmf_logger.create_context(pipeline_stage="3. Train GNN") #TODO: custom_properties={"TBD":"TBD"}
-    gnn_trainer, gnn_model = train_gnn(CONFIG, cmf_logger)
+    gnn_trainer, gnn_model = train_gnn(CONFIG)
 
     #4 GNN inference
-    context=cmf_logger.create_context(pipeline_stage="4. GNN Inference") #TODO: custom_properties={"TBD":"TBD"}
-    run_gnn_inference(CONFIG,cmf_logger)
+    run_gnn_inference(CONFIG)
 
     #5 Build Track Candidates from GNN
-    context=cmf_logger.create_context(pipeline_stage="5. Build Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
-    build_track_candidates(CONFIG,cmf_logger)
+    build_track_candidates(CONFIG)
 
     #6 Evaluate Track Candidates
-    context=cmf_logger.create_context(pipeline_stage="6. Evaluate Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
-    evaluated_events, reconstructed_particles, particles, matched_tracks, tracks = evaluate_candidates(CONFIG,cmf_logger)
+    evaluated_events, reconstructed_particles, particles, matched_tracks, tracks = evaluate_candidates(CONFIG)
 
 
 #Load Config
@@ -50,7 +45,9 @@ configs={}
 with open(CONFIG_ORIG, 'r') as f:
     configs = yaml.load(f, Loader=yaml.FullLoader)
     f.close()
-    
+
+#Run Defaults
+execution(CONFIG_ORIG)    
 
 #emb_hidden_opts=[ 512 , 256, 2048]
 #for x in emb_hidden_opts:
@@ -204,14 +201,14 @@ with open(CONFIG_ORIG, 'r') as f:
 # execution(CONFIG)
 
 
-n_graph_nb_node_layer_opts=[3] #Removed 6,9,12 since it has run
-metric_nb_layer_opts=[2,4,8,12] #removed 16. Removed 2,4 since it has run
-for x in n_graph_nb_node_layer_opts:
-    for y in metric_nb_layer_opts:
-        configs["gnn_configs"]["nb_node_layer"] = x
-        configs["metric_learning_configs"]["nb_layer"] = y
-        update_config(configs)
-        execution(CONFIG)
+# n_graph_nb_node_layer_opts=[3] #Removed 6,9,12 since it has run
+# metric_nb_layer_opts=[2,4,8,12] #removed 16. Removed 2,4 since it has run
+# for x in n_graph_nb_node_layer_opts:
+#     for y in metric_nb_layer_opts:
+#         configs["gnn_configs"]["nb_node_layer"] = x
+#         configs["metric_learning_configs"]["nb_layer"] = y
+#         update_config(configs)
+#         execution(CONFIG)
 
 
 

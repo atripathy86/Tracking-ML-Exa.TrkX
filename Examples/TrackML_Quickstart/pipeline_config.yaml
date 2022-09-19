@@ -1,7 +1,7 @@
 common_configs:
   artifact_directory: artifacts
   clear_directories: true
-  experiment_name: trackml_quickstart_1_40epochs
+  experiment_name: trackml_quickstart_2
   gpus: 1
 evaluation_configs:
   matching_fraction: 0.5

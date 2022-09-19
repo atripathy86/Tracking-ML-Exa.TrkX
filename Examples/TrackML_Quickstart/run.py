@@ -43,7 +43,9 @@ configs={}
 with open(CONFIG_ORIG, 'r') as f:
     configs = yaml.load(f, Loader=yaml.FullLoader)
     f.close()
-    
+
+#Run Defaults
+execution(CONFIG)    
 
 #emb_hidden_opts=[ 512 , 256, 2048]
 #for x in emb_hidden_opts:
@@ -197,14 +199,14 @@ with open(CONFIG_ORIG, 'r') as f:
 # execution(CONFIG)
 
 #3x12 did not run
-n_graph_nb_node_layer_opts=[3] #Removed 6,9,12 since it has run
-metric_nb_layer_opts=[2,4,8,12] #removed 16. Removed 2,4 since it has run
-for x in n_graph_nb_node_layer_opts:
-    for y in metric_nb_layer_opts:
-        configs["gnn_configs"]["nb_node_layer"] = x
-        configs["metric_learning_configs"]["nb_layer"] = y
-        update_config(configs)
-        execution(CONFIG)
+# n_graph_nb_node_layer_opts=[3] #Removed 6,9,12 since it has run
+# metric_nb_layer_opts=[2,4,8,12] #removed 16. Removed 2,4 since it has run
+# for x in n_graph_nb_node_layer_opts:
+#     for y in metric_nb_layer_opts:
+#         configs["gnn_configs"]["nb_node_layer"] = x
+#         configs["metric_learning_configs"]["nb_layer"] = y
+#         update_config(configs)
+#         execution(CONFIG)
 
 
 

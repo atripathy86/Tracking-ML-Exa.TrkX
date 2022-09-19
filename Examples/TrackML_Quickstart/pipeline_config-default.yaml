@@ -1,5 +1,5 @@
 common_configs:
-  experiment_name: trackml_quickstart_1_40epochs
+  experiment_name: trackml_quickstart_2
   artifact_directory: artifacts
   gpus: 1
   clear_directories: True

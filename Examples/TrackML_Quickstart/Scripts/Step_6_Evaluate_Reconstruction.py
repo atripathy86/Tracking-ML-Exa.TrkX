@@ -19,6 +19,9 @@ from functools import partial
 from utils.convenience_utils import headline
 from utils.plotting_utils import plot_pt_eff
 
+from cmflib import cmf
+from cmflib import dvc_wrapper
+
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser("5_Build_Track_Candidates.py")
@@ -175,6 +178,21 @@ def evaluate(config_file="pipeline_config.yaml"):
 
     # Plot the results across pT and eta
     plot_pt_eff(particles)
+
+    cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx")
+    context=cmf_logger.create_context(pipeline_stage="6. Evaluate Track Candidates") #TODO: custom_properties={"TBD":"TBD"}
+    execution=cmf_logger.create_execution(execution_type="EvalTrackCandidates", custom_properties = evaluation_configs)
+
+    cmf_logger.log_dataset(track_building_configs["output_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}
+    cmf_logger.log_dataset(evaluation_configs["output_dir"],"output") #TODO: custom_properties={"TBD":"TBD"}
+
+    # cmf_logger.log_model(
+    #     path=os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"), 
+    #     event="output", 
+    #     model_framework="PyTorchLightning", 
+    #     model_type="GNN",
+    #     model_name="GNN")
+
 
     # TODO: Plot the results
     return evaluated_events, reconstructed_particles, particles, matched_tracks, tracks
