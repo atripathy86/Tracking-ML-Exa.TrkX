@@ -48,7 +48,7 @@ def train(config_file="pipeline_config.yaml"):
 
     save_directory = os.path.join(common_configs["artifact_directory"], "metric_learning")
     logger = CSVLogger(save_directory, name=common_configs["experiment_name"])
-    cmflogger = CMFLogger("mlmd", pipeline_name="exatrkx", pipeline_stage="1. Train Metric Learning", execution_type="Train1", graph=True)
+    cmflogger = CMFLogger("mlmd", pipeline_name="exatrkx", pipeline_stage="1.TrainMetricLearning", execution_type="Train1", graph=True)
     print("My Execution ID="+str(cmflogger._execution.id))
 
     trainer = Trainer(
@@ -66,7 +66,7 @@ def train(config_file="pipeline_config.yaml"):
     trainer.save_checkpoint(os.path.join(save_directory, common_configs["experiment_name"]+".ckpt"))
 
     cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx", graph = True)
-    context=cmf_logger.create_context(pipeline_stage="1. Train Metric Learning") #TODO: custom_properties={"TBD":"TBD"}
+    context=cmf_logger.create_context(pipeline_stage="1.TrainMetricLearning") #TODO: custom_properties={"TBD":"TBD"}
     #execution=cmf_logger.create_execution(execution_type="Train1", custom_properties = metric_learning_configs)
     cmf_logger.update_execution(execution_id=cmflogger._execution.id, custom_properties = metric_learning_configs)
 

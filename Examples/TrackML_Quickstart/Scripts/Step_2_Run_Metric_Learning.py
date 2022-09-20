@@ -49,7 +49,7 @@ def train(config_file="pipeline_config.yaml"):
     graph_builder.build()
 
     cmf_logger = cmf.Cmf(filename="mlmd",pipeline_name="exatrkx", graph = True)
-    context=cmf_logger.create_context(pipeline_stage="2. Metric Learning Inference") #TODO: custom_properties={"TBD":"TBD"}
+    context=cmf_logger.create_context(pipeline_stage="2.MetricLearningInference") #TODO: custom_properties={"TBD":"TBD"}
     execution=cmf_logger.create_execution(execution_type="Infer1", custom_properties = metric_learning_configs)
 
     cmf_logger.log_dataset(metric_learning_configs["output_dir"], "input") #TODO: custom_properties={"TBD":"TBD"}

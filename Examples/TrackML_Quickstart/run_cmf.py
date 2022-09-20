@@ -51,7 +51,7 @@ execution(CONFIG_ORIG)
 
 emb_hidden_opts=[ 512 , 256, 2048]
 for x in emb_hidden_opts:
-    print(configs["metric_learning_configs"]["emb_hidden"])
+   #print(configs["metric_learning_configs"]["emb_hidden"])
    configs["metric_learning_configs"]["emb_hidden"] = x
    update_config(configs)
    #execution(CONFIG)
