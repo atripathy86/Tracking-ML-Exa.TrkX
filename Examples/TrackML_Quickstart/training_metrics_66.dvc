@@ -1,0 +1,4 @@
+outs:
+- md5: 405aa3db20631beb30942697c8db8f6a
+  size: 4807
+  path: training_metrics_66
