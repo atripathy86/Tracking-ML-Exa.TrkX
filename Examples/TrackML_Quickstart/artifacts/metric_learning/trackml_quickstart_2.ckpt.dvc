@@ -1,4 +1,4 @@
 outs:
-- md5: cff439dc0e694386e6056dea267d587f
-  size: 50946058
+- md5: e6fd3e5e2a1b524286651739eb15be3c
+  size: 68107370
   path: trackml_quickstart_2.ckpt
