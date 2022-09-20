@@ -1,5 +1,5 @@
 outs:
-- md5: aba71083fd9b977b45e48e80443a73af.dir
-  size: 338970016
+- md5: 421cd17f59d497e148150d3fc11767a3.dir
+  size: 335948960
   nfiles: 100
   path: quickstart_track_building_processed
