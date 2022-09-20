@@ -189,7 +189,7 @@ def evaluate(config_file="pipeline_config.yaml"):
     cmf_logger.log_execution_metrics("metrics", 
     {"Efficiency":eff, 
     "Fake Rate":fake_rate, 
-    "Duplication Rate": dup_rate, 
+    "Duplication Rate":dup_rate, 
     "Number of reconstructed particles":n_reconstructed_particles,
     "Number of particles":n_particles,
     "Number of matched tracks":n_matched_tracks,
