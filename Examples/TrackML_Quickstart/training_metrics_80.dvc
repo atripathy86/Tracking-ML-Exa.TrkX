@@ -1,0 +1,4 @@
+outs:
+- md5: c783a8b09d0aa723124c87c25ca4f4f3
+  size: 5417
+  path: training_metrics_80
