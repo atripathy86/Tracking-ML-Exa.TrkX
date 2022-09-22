@@ -1,5 +1,5 @@
 outs:
-- md5: 6567559d690e3feeec48b79ef5bdb12e.dir
-  size: 334282188
+- md5: c7db5c73a3ad1f444e5defb918f93921.dir
+  size: 426751820
   nfiles: 100
   path: quickstart_gnn_processed
