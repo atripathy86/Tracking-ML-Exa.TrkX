@@ -1,5 +1,5 @@
 outs:
-- md5: 3d0856b2e75b3bc2d25f5e2c06ac33af.dir
-  size: 9806442532
+- md5: 9717198567911ea61b4ebb175d539ac7.dir
+  size: 334934692
   nfiles: 100
   path: quickstart_metric_learning_processed
