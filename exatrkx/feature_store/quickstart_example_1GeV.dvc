@@ -1,0 +1,5 @@
+outs:
+- md5: c49476127cffb8da72432f82cbccf910.dir
+  size: 147734652
+  nfiles: 100
+  path: quickstart_example_1GeV
