@@ -1,0 +1,5 @@
+outs:
+- md5: 75c751717f64fca458eb24de5adb7a03.dir
+  size: 83950470
+  nfiles: 97
+  path: train_100_events
