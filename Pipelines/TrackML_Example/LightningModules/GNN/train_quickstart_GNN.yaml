@@ -1,7 +1,10 @@
 # Input/output configuration
 input_dir: ${EXATRKX_DATA}/embedding_processed/1GeV_pt_cut_quickstart_example
+#input_dir: ${EXATRKX_DATA}/embedding_processed/1GeV_pt_cut_all_data
 output_dir: ${EXATRKX_DATA}/gnn_processed/1GeV_pt_cut_quickstart_example
-project: CodaGNNStudy
+#output_dir: ${EXATRKX_DATA}/gnn_processed/1GeV_pt_cut_gnn_all_data
+#project: CodaGNNStudy
+project: Exatrkx
 edge_cut: 0.5
 
 # Dataset parameters

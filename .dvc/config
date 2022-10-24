@@ -1,0 +1,4 @@
+[core]
+    remote = scratch_remote
+['remote "scratch_remote"']
+    url = /global/cscratch1/sd/aalap/dvc_remote

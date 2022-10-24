@@ -29,5 +29,5 @@ regime: [[weighting, ci]]
 max_epochs: 100
 
 # Post-processing
-callbacks: #[FilterInferenceCallback]
+callbacks: [FilterInferenceCallback]
 

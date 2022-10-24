@@ -1,7 +1,10 @@
 # Input/output configuration
 input_dir: ${EXATRKX_DATA}/feature_store/quickstart_example_1GeV
+#input_dir: ${EXATRKX_DATA}/feature_store/all_data
 output_dir: ${EXATRKX_DATA}/embedding_processed/1GeV_pt_cut_quickstart_example
-project: CodaEmbeddingStudy
+#output_dir: ${EXATRKX_DATA}/embedding_processed/1GeV_pt_cut_all_data
+#project: CodaEmbeddingStudy
+project: Exatrkx
 overwrite: True
 
 # Dataset parameters
@@ -34,4 +37,5 @@ regime: [[rp, ci, hnm, norm]]
 max_epochs: 30
 
 # Postprocessing
-callbacks: [[EmbeddingTelemetry, EmbeddingBuilder]]
+#callbacks: [[EmbeddingTelemetry, EmbeddingBuilder]]
+callbacks: [[EmbeddingBuilder]]

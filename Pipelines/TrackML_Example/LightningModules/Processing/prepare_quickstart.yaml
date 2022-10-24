@@ -1,7 +1,9 @@
 # Input/output configuration
-input_dir: ${EXATRKX_DATA}/train_all
+#input_dir: ${EXATRKX_DATA}/train_all
+input_dir: ${EXATRKX_DATA}/train_100_events
 output_dir: ${EXATRKX_DATA}/feature_store/quickstart_example_1GeV
 detector_path: ${EXATRKX_DATA}/detectors.csv
+project: Exatrkx
 n_files: 100
 n_workers: 32
 n_tasks: 1
